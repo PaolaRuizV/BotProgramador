@@ -1,8 +1,6 @@
 def hola1():
     print("hola")
-
-def hola2():
-    print("hol2")
+    print("D:")
 
 def hola3():
     print("hola3")
