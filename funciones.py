@@ -9,6 +9,7 @@ def hola3():
 import subprocess
 import pyautogui
 import time
+import webbrowser
 
 def abrir_notepad():
     subprocess.Popen(['notepad.exe'])
@@ -30,7 +31,14 @@ def tomar_captura():
     screenshot.save('captura_pantalla.png')
     print("¡Captura tomada y guardada como 'captura_pantalla.png'!")
 
+def buscar_en_google():
+    webbrowser.open('https://www.google.com')
+    time.sleep(3)
+    pyautogui.write('Cae zoom a nivel mundial', interval=0.1)
+    pyautogui.press('enter')
+
 
 # abrir_notepad()
 # abrir_paint()
 # tomar_captura()
+buscar_en_google()
