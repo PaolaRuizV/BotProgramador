@@ -37,8 +37,27 @@ def buscar_en_google():
     pyautogui.write('Cae zoom a nivel mundial', interval=0.1)
     pyautogui.press('enter')
 
+def reproducir_youtube():
+    webbrowser.open('https://www.youtube.com')
+    time.sleep(5)
+
+    pyautogui.press('tab', presses=4, interval=0.2)  # navegar hasta el campo de búsqueda
+    pyautogui.press('enter')
+    time.sleep(1)
+
+    pyautogui.write('date un voltio', interval=0.1)
+    pyautogui.press('enter')
+    time.sleep(5)
+
+    pyautogui.moveTo(350, 350)
+    pyautogui.click()
+
+    #pyautogui.press('tab', presses=4, interval=0.3)  # Ir al primer video
+    #pyautogui.press('enter')  # Reproducir
+
 
 # abrir_notepad()
 # abrir_paint()
 # tomar_captura()
-buscar_en_google()
+# buscar_en_google()
+reproducir_youtube()
