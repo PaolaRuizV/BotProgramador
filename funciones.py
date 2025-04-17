@@ -1,11 +1,3 @@
-def hola1():
-    print("hola")
-    print("D:")
-
-def hola3():
-    print("hola3")
-    print("aaaaaaaa")
-
 import subprocess
 import pyautogui
 import time
@@ -55,9 +47,9 @@ def reproducir_youtube():
     #pyautogui.press('tab', presses=4, interval=0.3)  # Ir al primer video
     #pyautogui.press('enter')  # Reproducir
 
-
-# abrir_notepad()
-# abrir_paint()
-# tomar_captura()
-# buscar_en_google()
-reproducir_youtube()
+if __name__ == "__main__":
+    # abrir_notepad()
+    # abrir_paint()
+    # tomar_captura()
+    # buscar_en_google()
+    reproducir_youtube()

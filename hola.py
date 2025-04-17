@@ -3,12 +3,18 @@
 import time
 import speech_recognition as sr
 import keyboard  # Necesitarás instalarlo con: pip install keyboard
+from funciones import *
 
 # Esta función se llama desde el hilo en segundo plano
 def callback(recognizer, audio):
     try:
         texto = recognizer.recognize_google(audio, language="es_PE")
         print("Google Speech Recognition thinks you said:", texto)
+        
+        #TODO Implementacion de IA para interpretar el msg
+        if ( texto.find("Google") != -1 ):
+            buscar_en_google()
+
     except sr.UnknownValueError:
         print("No se entendió el audio")
     except sr.RequestError as e:
