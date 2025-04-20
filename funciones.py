@@ -56,6 +56,8 @@ def reproducir_youtube():
     #pyautogui.press('enter')  # Reproducir
 
 
+
+
 # abrir_notepad()
 # abrir_paint()
 # tomar_captura()
