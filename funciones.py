@@ -2,13 +2,14 @@ import subprocess
 import pyautogui
 import time
 import webbrowser
+from AppOpener import open
 
 def abrir_notepad():
     subprocess.Popen(['notepad.exe'])
     time.sleep(1)  # Espera a que se abra
     pyautogui.write('Hola :D', interval=0.1)
 
-def abrir_paint():
+def abrir_paint():  
     subprocess.Popen(['mspaint.exe'])
     time.sleep(3)  # Espera a que Paint esté listo
 
@@ -37,7 +38,7 @@ def reproducir_youtube():
     pyautogui.press('enter')
     time.sleep(1)
 
-    pyautogui.write('date un voltio', interval=0.1)
+    pyautogui.write('Hola mundo', interval=0.1)
     pyautogui.press('enter')
     time.sleep(5)
 
@@ -47,9 +48,40 @@ def reproducir_youtube():
     #pyautogui.press('tab', presses=4, interval=0.3)  # Ir al primer video
     #pyautogui.press('enter')  # Reproducir
 
+
+def abrirSpotify():
+    open('spotify') 
+    time.sleep(5)
+
+    pyautogui.press('tab', presses=17, interval=0.5) 
+    pyautogui.press('enter')
+    time.sleep(1)
+
+def pasarDeCancionSpotify():
+    open('spotify') 
+    time.sleep(5)
+
+    pyautogui.press('tab', presses=18, interval=0.5) 
+    pyautogui.press('enter')
+    time.sleep(1)
+
+def retrocederCancionSpotify():
+    open('spotify') 
+    time.sleep(5)
+
+    pyautogui.press('tab', presses=16, interval=0.5) 
+    pyautogui.press('enter')
+    time.sleep(1)
+
+def abrirWhatsapp():
+     open('whatsapp')
+
 if __name__ == "__main__":
-    # abrir_notepad()
-    # abrir_paint()
-    # tomar_captura()
-    # buscar_en_google()
-    reproducir_youtube()
+     #abrir_notepad()       
+     #abrir_paint()                                                                         
+     #tomar_captura()
+     #buscar_en_google()             
+     
+     reproducir_youtube()
+     #abrirSpotify()
+     #abrirWhatsapp()
