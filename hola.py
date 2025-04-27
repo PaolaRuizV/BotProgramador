@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-
 import time
 import speech_recognition as sr
-import keyboard  # Necesitarás instalarlo con: pip install keyboard
 from funciones import *
 from parteIA import reconocerFuncion
 
@@ -34,6 +31,10 @@ def callback(recognizer: sr.Recognizer, audio):
 r = sr.Recognizer()
 r.energy_threshold = 45
 m = sr.Microphone()
+
+#Inicializar IA
+listaFunciones = LISTA_ACCIONES[0]
+listaFunciones.funcion()
 
 # Calibrar ruido ambiental
 with m as source:
