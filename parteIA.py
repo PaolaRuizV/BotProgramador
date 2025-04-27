@@ -1,0 +1,2 @@
+def reconocerFuncion():
+    return "NINGUNA"

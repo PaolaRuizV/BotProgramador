@@ -4,16 +4,26 @@ import time
 import speech_recognition as sr
 import keyboard  # Necesitarás instalarlo con: pip install keyboard
 from funciones import *
+from parteIA import reconocerFuncion
+
+RECOGNIZER = "google" # o puede remplazarlo por "google" o "whisper"
 
 # Esta función se llama desde el hilo en segundo plano
-def callback(recognizer, audio):
+def callback(recognizer: sr.Recognizer, audio):
     try:
-        texto = recognizer.recognize_google(audio, language="es_PE")
-        print("Google Speech Recognition thinks you said:", texto)
+        if RECOGNIZER == "whisper":
+            texto = recognizer.recognize_whisper(audio, model="tiny") # Modelos (somehow se instalan solos en la primer ejecucion) 'tiny.en', 'tiny', 'base.en', 'base', 'small.en', 'small', 'medium.en', 'medium', 'large']
+            print("Speech Recognition escucha esto:", texto)
+        elif RECOGNIZER == "google":
+            texto = recognizer.recognize_google(audio, language="es_PE")
+            print("Google Speech Recognition escucha esto:", texto)
         
         #TODO Implementacion de IA para interpretar el msg
-        if ( texto.find("Google") != -1 ):
+        opcion = reconocerFuncion()
+        if ( opcion==1 ):
             buscar_en_google()
+        elif opcion==2:
+            abrir_notepad()
 
     except sr.UnknownValueError:
         print("No se entendió el audio")
@@ -39,11 +49,12 @@ print("Presiona 'q' para salir del programa.")
 
 try:
     while True:
-        if keyboard.is_pressed('q'):
-            print("Deteniendo escucha...")
+        a = input()
+        if a.upper() == "Q":
             stop_listening(wait_for_stop=False)
             break
-        time.sleep(0.1)
+        time.sleep(3)
+        
 except KeyboardInterrupt:
     stop_listening(wait_for_stop=False)
     print("Interrupción manual detectada. Finalizando...")
