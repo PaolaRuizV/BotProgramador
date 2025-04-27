@@ -6,9 +6,9 @@ import keyboard  # Necesitarás instalarlo con: pip install keyboard
 from funciones import *
 
 # Esta función se llama desde el hilo en segundo plano
-def callback(recognizer, audio):
+def callback(recognizer: sr.Recognizer, audio):
     try:
-        texto = recognizer.recognize_google(audio, language="es_PE")
+        texto = recognizer.recognize_whisper(audio, model="tiny.en") # Modelos (somehow se instalan solos en la primer ejecucion) 'tiny.en', 'tiny', 'base.en', 'base', 'small.en', 'small', 'medium.en', 'medium', 'large']
         print("Google Speech Recognition thinks you said:", texto)
         
         #TODO Implementacion de IA para interpretar el msg
@@ -43,7 +43,11 @@ try:
             print("Deteniendo escucha...")
             stop_listening(wait_for_stop=False)
             break
-        time.sleep(0.1)
+        a = input()
+        b = input()
+        if a.upper() == "Q" or b.upper() == "Q": break
+        print(f"Suma: {int(a)+int(b)}")
+        time.sleep(3)
 except KeyboardInterrupt:
     stop_listening(wait_for_stop=False)
     print("Interrupción manual detectada. Finalizando...")
