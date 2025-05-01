@@ -3,8 +3,37 @@ import os
 from dotenv import load_dotenv
 
 
+load_dotenv()
+API_TOKEN = os.getenv("HF_API_TOKEN")
+API_URL = "https://router.huggingface.co/hf-inference/pipeline/sentence-similarity/sentence-transformers/all-MiniLM-L6-v2"
+
+headers = {
+    "Authorization": f"Bearer {API_TOKEN}",
+}
+
+# Funcion para comparar las similitudes entre un prompt y una serie de frases
+def similitud_frases(prompt: str, listaOpciones: str):
+    payload = {
+        "inputs": {
+            "source_sentence": prompt,
+            "sentences": listaOpciones
+        }
+    }
+    response = requests.post(API_URL, headers=headers, json=payload)
+    data = response.json()
+    
+    # Codigo para checar errores desde la solicitud API
+    if isinstance(data, dict) and "error" in data:
+        raise Exception(f"API Error: {data['error']}")
+    
+    return data  # Esto es una lista con los valores de similaridad
+
 # if name main para solo en caso se ejecute este archivo solo
 if __name__ == "__main__":
+
+    # *
+    # * FUNCIONAMIENTO DE EJEMPLO 
+    # *
     load_dotenv()
 
     API_TOKEN = os.getenv("HF_API_TOKEN")
@@ -31,10 +60,12 @@ if __name__ == "__main__":
         return data  # Esto es una lista con los valores de similaridad
 
     # Definir la lista de acciones
-    actions = ["volume up", "volume down", "next song", "pause", "search song"]
+    actions = ["raises the volume up", "lowers the volume down", "jumps to next song", "stop the song", "search for a song"]
+    actions = ["aumenta el volumen del sonido", "baja el volumen de sonido", "pasa a la siguiente cancion", "hace pausa en la cancion que este sonando", "busca por una cancion especifica"]
 
     # Definir el "input del usuario"
-    prompt = "stop the music"
+    prompt = "please low the music, it is too loud"
+    prompt = "low the music"
 
     # Obtener los scores de similaridad
     similarity_scores = query_similarity(prompt, actions)

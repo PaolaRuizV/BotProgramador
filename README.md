@@ -32,3 +32,18 @@ Más allá del resultado final, el proyecto fue una oportunidad para aprender, e
 
 La motivación principal de este proyecto fue explorar el uso de reconocimiento de voz en automatización de tareas diarias.
 Además, sirve como base para proyectos más grandes como asistentes personales, bots o sistemas de accesibilidad.
+
+
+\
+\
+\
+!! Consumimos de este LLM en HuggingFace para hacer lo de la comparacion de oraciones
+
+
+## Anotaciones para la ejecución
+* Es necesario crearse una cuenta de HuggingFace y crear un TOKEN read \
+el token debe ser colocarse en un archivo .env (existe el archivo example.env de referencia)
+
+* El LLM que utiliza el bot no puede recibir oraciones demasiado largas, ademas que realiza una comparacion de semantica entre el prompt y la descripcion de la funcion, por ende > oraciones muy largas o muy complejas puede que no las interprete correctamente
+
+* El bot, siempre va elegir la funcionalidad con mayor similitud a lo que solicitas. Se puede definir un minimo valor de aceptacion entre las variables al inicio del archivo principal.
