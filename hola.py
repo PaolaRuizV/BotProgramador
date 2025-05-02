@@ -8,6 +8,7 @@ RECOGNIZER = "google" # o puede remplazarlo por "google" o "whisper"
 # Esta función se llama desde el hilo en segundo plano
 def callback(recognizer: sr.Recognizer, audio):
     try:
+        texto = ""
         if RECOGNIZER == "whisper":
             texto = recognizer.recognize_whisper(audio, model="tiny") # Modelos (somehow se instalan solos en la primer ejecucion) 'tiny.en', 'tiny', 'base.en', 'base', 'small.en', 'small', 'medium.en', 'medium', 'large']
             print("Speech Recognition escucha esto:", texto)
@@ -15,9 +16,10 @@ def callback(recognizer: sr.Recognizer, audio):
             texto = recognizer.recognize_google(audio, language="es_PE")
             print("Google Speech Recognition escucha esto:", texto)
         
-        # La funcion retorna una ACCION, por lo cual solo se ejecuta la funcion
-        opcion = buscar_funcion_correspondiente()
-        opcion.funcion()
+        # Solo en caso haya la palabra clave COMPUTADORA, se busca una accion adecuada
+        if "computadora" in texto:
+            opcion = buscar_funcion_correspondiente(prompt=texto, threshold=0.5) # La funcion retorna una ACCION, por lo cual solo se ejecuta la funcion
+            opcion.funcion()
 
     except sr.UnknownValueError:
         print("No se entendió el audio")
@@ -42,7 +44,7 @@ with m as source:
 stop_listening = r.listen_in_background(m, callback)
 
 # Bucle principal, se detiene si se presiona la tecla "q"
-print("Presiona 'q' para salir del programa.")
+print("Ingresa 'q' para salir del programa.")
 
 try:
     while True:

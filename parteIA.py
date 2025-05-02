@@ -12,7 +12,7 @@ headers = {
 }
 
 # Funcion para devolver la accion que mejor corresponde a un prompt ingresado
-def buscar_funcion_correspondiente(prompt: str, threshold: int = 0) -> Accion:
+def buscar_funcion_correspondiente(prompt: str, threshold: float = 0) -> Accion:
     
     listaOpciones = list( acciones.descripcion for acciones in LISTA_ACCIONES ) # solo conserva las descripciones de la lista de funciones
     
@@ -24,18 +24,18 @@ def buscar_funcion_correspondiente(prompt: str, threshold: int = 0) -> Accion:
         }
     }
     response = requests.post(API_URL, headers=headers, json=payload)
-    data = response.json()
+    similarity_scores = response.json()
 
     # Codigo para checar errores desde la solicitud API
-    if isinstance(data, dict) and "error" in data:
-        print( Exception(f"API Error: {data['error']}") )
+    if isinstance(similarity_scores, dict) and "error" in similarity_scores:
+        print( Exception(f"API Error: {similarity_scores['error']}") )
         return ACCION_ERROR
     
     # Se obtiene el indice de la mejor opcion similar
     best_idx = int(max( range(len(similarity_scores)), key=lambda i: similarity_scores[i]) )
 
     # ? OPTIONAL - en caso la mejor opcion tenga una similitud menor al threshold, entonces no se considera
-    if data[best_idx] < threshold:
+    if similarity_scores[best_idx] < threshold:
         return ACCION_ERROR
 
     return LISTA_ACCIONES[best_idx]  # Esto es una lista con los valores de similaridad

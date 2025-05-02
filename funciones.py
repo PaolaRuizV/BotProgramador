@@ -15,10 +15,10 @@ class Accion:
 
 def abrir_notepad():
     subprocess.Popen(['notepad.exe'])
-    time.sleep(1)  # Espera a que se abra
+    time.sleep(0.5)  # Espera a que se abra
     pyautogui.write('Hola :D', interval=0.1)
 
-def abrir_paint():  
+def abrir_paint():
     subprocess.Popen(['mspaint.exe'])
     time.sleep(3)  # Espera a que Paint esté listo
 
@@ -47,12 +47,12 @@ def reproducir_youtube():
     pyautogui.press('enter')
     time.sleep(1)
 
-    pyautogui.write('Hola mundo', interval=0.1)
-    pyautogui.press('enter')
-    time.sleep(5)
+    # pyautogui.write('Hola mundo', interval=0.1)
+    # pyautogui.press('enter')
+    # time.sleep(5)
 
-    pyautogui.moveTo(350, 350)
-    pyautogui.click()
+    # pyautogui.moveTo(350, 350)
+    # pyautogui.click()
 
     #pyautogui.press('tab', presses=4, interval=0.3)  # Ir al primer video
     #pyautogui.press('enter')  # Reproducir
@@ -61,20 +61,18 @@ def reproducir_youtube():
 LISTA_ACCIONES = [
     Accion(
         nombre_= "Abrir Notepad",
-        descripcion_= "Esta funcion abre NotePad en Windows",
+        descripcion_= "Abre la aplicacion Notepad o Bloc de Notas de Windows",
         funcion_= abrir_notepad
     )
     # Agregar mas funciones
 
 ]
 
-ACCION_ERROR = [
-    Accion(
+ACCION_ERROR = Accion(
         nombre_ = "Error al entender",
         descripcion_ = "Esta funcion se ejecuta cuando no se ha entendido el prompt que dijo el usuario",
-        funcion_ = lambda a : print("No entendi lo que me pediste")
+        funcion_ = lambda: print("No entendi lo que me pediste")
     )
-]
 
 
 def abrirSpotify():
