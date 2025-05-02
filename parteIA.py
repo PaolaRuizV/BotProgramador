@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-
+from funciones import *
 
 load_dotenv()
 API_TOKEN = os.getenv("HF_API_TOKEN")
@@ -11,8 +11,12 @@ headers = {
     "Authorization": f"Bearer {API_TOKEN}",
 }
 
-# Funcion para comparar las similitudes entre un prompt y una serie de frases
-def similitud_frases(prompt: str, listaOpciones: str):
+# Funcion para devolver la accion que mejor corresponde a un prompt ingresado
+def buscar_funcion_correspondiente(prompt: str, threshold: int = 0) -> Accion:
+    
+    listaOpciones = list( acciones.descripcion for acciones in LISTA_ACCIONES ) # solo conserva las descripciones de la lista de funciones
+    
+    # preparar data para enviar a la IA
     payload = {
         "inputs": {
             "source_sentence": prompt,
@@ -21,12 +25,20 @@ def similitud_frases(prompt: str, listaOpciones: str):
     }
     response = requests.post(API_URL, headers=headers, json=payload)
     data = response.json()
-    
+
     # Codigo para checar errores desde la solicitud API
     if isinstance(data, dict) and "error" in data:
-        raise Exception(f"API Error: {data['error']}")
+        print( Exception(f"API Error: {data['error']}") )
+        return ACCION_ERROR
     
-    return data  # Esto es una lista con los valores de similaridad
+    # Se obtiene el indice de la mejor opcion similar
+    best_idx = int(max( range(len(similarity_scores)), key=lambda i: similarity_scores[i]) )
+
+    # ? OPTIONAL - en caso la mejor opcion tenga una similitud menor al threshold, entonces no se considera
+    if data[best_idx] < threshold:
+        return ACCION_ERROR
+
+    return LISTA_ACCIONES[best_idx]  # Esto es una lista con los valores de similaridad
 
 # if name main para solo en caso se ejecute este archivo solo
 if __name__ == "__main__":

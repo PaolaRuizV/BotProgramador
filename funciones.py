@@ -3,16 +3,15 @@ import pyautogui
 import time
 import webbrowser
 import types
+from AppOpener import open
 
 # La clase para contener las acciones que puede realizar el bot
-class Acciones:
+class Accion:
     def __init__(self, nombre_: str, descripcion_: str, funcion_: types.FunctionType):
         self.nombre = nombre_           # Esto es el nombre de la accion
         self.descripcion = descripcion_ # Esto explica de que se trata esta accion
         self.funcion = funcion_         # Esto es la funcion que va ejecutar la accion
         pass
-    
-from AppOpener import open
 
 def abrir_notepad():
     subprocess.Popen(['notepad.exe'])
@@ -60,15 +59,22 @@ def reproducir_youtube():
 
 
 LISTA_ACCIONES = [
-    Acciones(
+    Accion(
         nombre_= "Abrir Notepad",
-        descripcion_= "La funcion abre NotePad en Windows",
+        descripcion_= "Esta funcion abre NotePad en Windows",
         funcion_= abrir_notepad
     )
     # Agregar mas funciones
 
 ]
 
+ACCION_ERROR = [
+    Accion(
+        nombre_ = "Error al entender",
+        descripcion_ = "Esta funcion se ejecuta cuando no se ha entendido el prompt que dijo el usuario",
+        funcion_ = lambda a : print("No entendi lo que me pediste")
+    )
+]
 
 
 def abrirSpotify():

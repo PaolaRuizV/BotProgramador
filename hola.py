@@ -1,7 +1,7 @@
 import time
 import speech_recognition as sr
 from funciones import *
-from parteIA import reconocerFuncion
+from parteIA import buscar_funcion_correspondiente
 
 RECOGNIZER = "google" # o puede remplazarlo por "google" o "whisper"
 
@@ -15,12 +15,9 @@ def callback(recognizer: sr.Recognizer, audio):
             texto = recognizer.recognize_google(audio, language="es_PE")
             print("Google Speech Recognition escucha esto:", texto)
         
-        #TODO Implementacion de IA para interpretar el msg
-        opcion = reconocerFuncion()
-        if ( opcion==1 ):
-            buscar_en_google()
-        elif opcion==2:
-            abrir_notepad()
+        # La funcion retorna una ACCION, por lo cual solo se ejecuta la funcion
+        opcion = buscar_funcion_correspondiente()
+        opcion.funcion()
 
     except sr.UnknownValueError:
         print("No se entendió el audio")
@@ -33,8 +30,7 @@ r.energy_threshold = 45
 m = sr.Microphone()
 
 #Inicializar IA
-listaFunciones = LISTA_ACCIONES[0]
-listaFunciones.funcion()
+
 
 # Calibrar ruido ambiental
 with m as source:

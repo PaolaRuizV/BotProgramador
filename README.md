@@ -46,4 +46,4 @@ el token debe ser colocarse en un archivo .env (existe el archivo example.env de
 
 * El LLM que utiliza el bot no puede recibir oraciones demasiado largas, ademas que realiza una comparacion de semantica entre el prompt y la descripcion de la funcion, por ende > oraciones muy largas o muy complejas puede que no las interprete correctamente
 
-* El bot, siempre va elegir la funcionalidad con mayor similitud a lo que solicitas. Se puede definir un minimo valor de aceptacion entre las variables al inicio del archivo principal.
+* El bot, siempre va elegir la funcionalidad con mayor similitud a lo que solicitas. Se puede definir un minimo valor de aceptacion al ejecutar la funcion de ```buscar_funcion_correspondiente()```
