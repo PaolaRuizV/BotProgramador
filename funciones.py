@@ -143,8 +143,6 @@ ACCION_ERROR = Accion(
     )
 
 
-
-
 if __name__ == "__main__":
      #abrir_notepad()       
      #abrir_paint()                                                                         
