@@ -58,23 +58,6 @@ def reproducir_youtube():
     #pyautogui.press('enter')  # Reproducir
 
 
-LISTA_ACCIONES = [
-    Accion(
-        nombre_= "Abrir Notepad",
-        descripcion_= "Abre la aplicacion Notepad o Bloc de Notas de Windows",
-        funcion_= abrir_notepad
-    )
-    # Agregar mas funciones
-
-]
-
-ACCION_ERROR = Accion(
-        nombre_ = "Error al entender",
-        descripcion_ = "Esta funcion se ejecuta cuando no se ha entendido el prompt que dijo el usuario",
-        funcion_ = lambda: print("No entendi lo que me pediste")
-    )
-
-
 def abrirSpotify():
     open('spotify') 
     time.sleep(5)
@@ -101,6 +84,65 @@ def retrocederCancionSpotify():
 
 def abrirWhatsapp():
      open('whatsapp')
+
+
+LISTA_ACCIONES = [
+    Accion(
+        nombre_= "Abrir Notepad",
+        descripcion_= "Abre la aplicacion Notepad o Bloc de Notas de Windows",
+        funcion_= abrir_notepad
+    ),
+    Accion(
+        nombre_="Abrir Paint",
+        descripcion_="Abre Microsoft Paint y dibuja un cuadrado automáticamente",
+        funcion_=abrir_paint
+    ),
+    Accion(
+        nombre_="Tomar captura de pantalla",
+        descripcion_="Realiza una captura de pantalla y la guarda como 'captura_pantalla.png'",
+        funcion_=tomar_captura
+    ),
+    Accion(
+        nombre_="Buscar en Google",
+        descripcion_="Abre Google en el navegador y busca 'Cae zoom a nivel mundial'",
+        funcion_=buscar_en_google
+    ),
+    Accion(
+        nombre_="Abrir YouTube",
+        descripcion_="Abre YouTube en el navegador y se posiciona en el buscador",
+        funcion_=reproducir_youtube
+    ),
+    Accion(
+        nombre_="Abrir Spotify",
+        descripcion_="Abre Spotify y reproduce música automáticamente",
+        funcion_=abrirSpotify
+    ),
+    Accion(
+        nombre_="Pasar canción en Spotify",
+        descripcion_="Pasa a la siguiente canción en Spotify",
+        funcion_=pasarDeCancionSpotify
+    ),
+    Accion(
+        nombre_="Retroceder canción en Spotify",
+        descripcion_="Regresa a la canción anterior en Spotify",
+        funcion_=retrocederCancionSpotify
+    ),
+    Accion(
+        nombre_="Abrir WhatsApp",
+        descripcion_="Abre la aplicación de WhatsApp",
+        funcion_=abrirWhatsapp
+    )
+    # Agregar mas funciones
+
+]
+
+ACCION_ERROR = Accion(
+        nombre_ = "Error al entender",
+        descripcion_ = "Esta funcion se ejecuta cuando no se ha entendido el prompt que dijo el usuario",
+        funcion_ = lambda: print("No entendi lo que me pediste")
+    )
+
+
 
 
 if __name__ == "__main__":
